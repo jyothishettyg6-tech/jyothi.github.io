@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jyothi G — Cloud & DevOps Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f7f9ff;
+  --bg2:#eef2ff;
+  --bg3:#e4eaff;
+  --panel:#ffffff;
+  --panel2:#f0f4ff;
+  --azure:#0070c0;
+  --azure2:#0090d8;
+  --cyan:#0099cc;
+  --gold:#c47a00;
+  --gold2:#d98a10;
+  --text:#0d1830;
+  --text2:#1a2940;
+  --muted:#546a88;
+  --muted2:#6a82a0;
+  --border:rgba(0,100,200,0.12);
+  --border2:rgba(0,100,200,0.2);
+  --glow:rgba(0,120,200,0.12);
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Syne',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+  cursor:none;
+}
+
+/* CUSTOM CURSOR */
+.cursor-dot{
+  position:fixed;width:6px;height:6px;
+  background:var(--azure);border-radius:50%;
+  pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);
+  box-shadow:0 0 10px rgba(0,120,200,0.5);
+}
+.cursor-ring{
+  position:fixed;width:36px;height:36px;
+  border:1px solid rgba(0,120,200,0.3);
+  border-radius:50%;pointer-events:none;z-index:9998;
+  transform:translate(-50%,-50%);
+  transition:width 0.3s,height 0.3s,border-color 0.3s;
+}
+
+/* CANVAS BG */
+#bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(247,249,255,0.88);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(0,100,200,0.1);
+  padding:0 3.5rem;height:64px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nav-logo{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.82rem;color:var(--text);
+  font-weight:400;letter-spacing:0.06em;
+  display:flex;align-items:center;gap:0.5rem;
+}
+.nav-logo-bracket{color:var(--azure);opacity:0.6}
+.nav-logo-name{color:var(--azure)}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.72rem;font-weight:400;
+  color:var(--muted2);text-decoration:none;
+  letter-spacing:0.1em;text-transform:uppercase;
+  transition:color 0.2s;position:relative;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-4px;left:0;right:0;
+  height:1px;background:var(--azure);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform 0.2s;
+}
+.nav-links a:hover{color:var(--azure)}
+.nav-links a:hover::after{transform:scaleX(1)}
+.nav-status{
+  display:flex;align-items:center;gap:0.55rem;
+  border:1px solid rgba(0,120,200,0.2);
+  background:rgba(0,120,200,0.06);
+  color:var(--azure);padding:0.35rem 1rem;
+  border-radius:2px;font-family:'IBM Plex Mono',monospace;
+  font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;
+}
+.live-dot{
+  width:6px;height:6px;background:var(--azure);border-radius:50%;
+  animation:pulse-dot 2s infinite;
+  box-shadow:0 0 6px rgba(0,120,200,0.6);
+}
+@keyframes pulse-dot{
+  0%,100%{opacity:1;box-shadow:0 0 6px rgba(0,120,200,0.6)}
+  50%{opacity:0.3;box-shadow:none}
+}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  padding:8rem 3.5rem 5rem;
+  display:flex;align-items:center;
+  position:relative;z-index:1;overflow:hidden;
+}
+.hero-grid{
+  max-width:1200px;margin:0 auto;
+  width:100%;
+  display:grid;grid-template-columns:1fr 400px;gap:6rem;align-items:center;
+}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:0.75rem;
+  margin-bottom:2rem;
+}
+.hero-tag-line{
+  width:2.5rem;height:1px;
+  background:linear-gradient(90deg,var(--azure),transparent);
+}
+.hero-tag-text{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.68rem;color:var(--azure2);
+  letter-spacing:0.18em;text-transform:uppercase;
+}
+h1.hero-name{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(4rem,8vw,7.5rem);
+  font-weight:800;line-height:0.9;
+  letter-spacing:-0.04em;
+  margin-bottom:0.4rem;
+}
+h1.hero-name .first{
+  display:block;color:var(--text);
+}
+h1.hero-name .last{
+  display:block;
+  font-family:'Cormorant Garamond',serif;
+  font-weight:300;font-style:italic;
+  color:var(--azure);
+  font-size:clamp(3.5rem,7.5vw,7rem);
+  line-height:1;
+}
+.hero-role{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.78rem;color:var(--muted);
+  margin:1.5rem 0 2.5rem;
+  letter-spacing:0.06em;
+  display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;
+}
+.role-sep{color:var(--azure);opacity:0.5}
+.hero-bio{
+  font-size:1.02rem;color:var(--muted);
+  line-height:1.8;font-weight:400;
+  max-width:520px;margin-bottom:3rem;
+  padding-left:1.5rem;
+  border-left:2px solid rgba(0,120,200,0.35);
+  position:relative;
+}
+.hero-bio::before{
+  content:'';position:absolute;left:-1px;top:0;
+  width:1px;height:40%;
+  background:linear-gradient(180deg,var(--azure2),var(--azure));
+}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:3rem}
+.btn-primary{
+  background:transparent;
+  border:1.5px solid var(--azure);
+  color:var(--azure);
+  padding:0.85rem 2rem;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.78rem;font-weight:400;
+  text-decoration:none;letter-spacing:0.1em;text-transform:uppercase;
+  transition:all 0.25s;display:inline-flex;align-items:center;gap:0.6rem;
+  position:relative;overflow:hidden;
+}
+.btn-primary::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(0,148,214,0.12),rgba(0,212,255,0.04));
+  transform:translateX(-100%);transition:transform 0.3s;
+}
+.btn-primary:hover::before{transform:translateX(0)}
+.btn-primary:hover{border-color:var(--azure2);color:var(--azure2);box-shadow:0 4px 20px rgba(0,120,200,0.18)}
+.btn-secondary{
+  background:transparent;
+  border:1.5px solid rgba(0,80,160,0.15);
+  color:var(--muted);
+  padding:0.85rem 2rem;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.78rem;font-weight:400;
+  text-decoration:none;letter-spacing:0.1em;text-transform:uppercase;
+  transition:all 0.25s;display:inline-flex;align-items:center;gap:0.6rem;
+}
+.btn-secondary:hover{border-color:rgba(0,100,180,0.4);color:var(--azure)}
+.hero-meta{display:flex;gap:2rem;flex-wrap:wrap}
+.hero-meta a{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.72rem;color:var(--muted2);
+  text-decoration:none;font-weight:400;
+  transition:color 0.15s;display:flex;align-items:center;gap:0.4rem;
+}
+.hero-meta a:hover{color:var(--azure)}
+
+/* HERO SIDE PANEL */
+.hero-panel{
+  display:flex;flex-direction:column;gap:1rem;
+}
+.panel-card{
+  background:var(--panel);
+  border:1px solid var(--border);
+  padding:1.5rem 1.75rem;
+  position:relative;overflow:hidden;
+}
+.panel-card::before{
+  content:'';position:absolute;
+  top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(0,120,200,0.4),transparent);
+  opacity:0.6;
+}
+.panel-card.glow-card{
+  border-color:rgba(0,212,255,0.2);
+  background:linear-gradient(135deg,rgba(0,120,220,0.05),rgba(230,240,255,0.8));
+}
+.panel-card.glow-card::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 0% 0%,rgba(0,120,220,0.06) 0%,transparent 60%);
+  pointer-events:none;
+}
+.plabel{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.6rem;color:var(--muted2);
+  letter-spacing:0.18em;text-transform:uppercase;
+  margin-bottom:1.25rem;
+  display:flex;align-items:center;gap:0.5rem;
+}
+.plabel::before{content:'//';color:var(--azure);opacity:0.7}
+.avatar-block{display:flex;align-items:center;gap:1rem;margin-bottom:1.25rem}
+.av{
+  width:48px;height:48px;
+  background:linear-gradient(135deg,var(--azure),var(--cyan));
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:1rem;color:var(--bg);
+  position:relative;flex-shrink:0;
+}
+.av::after{
+  content:'';position:absolute;inset:-2px;
+  background:linear-gradient(135deg,var(--azure),var(--cyan));
+  z-index:-1;opacity:0.3;
+  clip-path:inset(0);
+  filter:blur(4px);
+}
+.av-info .av-name{font-size:0.9rem;font-weight:600;color:var(--text)}
+.av-info .av-role{font-size:0.72rem;color:var(--muted);margin-top:2px}
+.stats-row{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:0.75rem;
+}
+.stat-cell{
+  background:rgba(0,80,180,0.05);
+  padding:0.75rem;text-align:center;
+  border:1px solid rgba(0,100,200,0.1);
+}
+.stat-n{
+  font-family:'Syne',sans-serif;
+  font-weight:800;font-size:1.5rem;
+  color:var(--azure);
+  text-shadow:none;
+  line-height:1;
+}
+.stat-l{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.6rem;color:var(--muted);
+  letter-spacing:0.1em;text-transform:uppercase;
+  margin-top:4px;
+}
+.cert-chips{display:flex;flex-wrap:wrap;gap:0.4rem}
+.chip{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.62rem;padding:0.22rem 0.65rem;
+  font-weight:400;letter-spacing:0.06em;
+}
+.chip-azure{
+  background:rgba(0,100,200,0.08);
+  color:var(--azure);
+  border:1px solid rgba(0,100,200,0.22);
+}
+.chip-cyan{
+  background:rgba(0,140,180,0.08);
+  color:#007aa0;
+  border:1px solid rgba(0,140,180,0.25);
+}
+.chip-gold{
+  background:rgba(180,100,0,0.07);
+  color:var(--gold);
+  border:1px solid rgba(180,100,0,0.2);
+}
+.panel-co{color:var(--text);font-weight:600;font-size:0.88rem;margin-bottom:0.3rem}
+.panel-co-sub{color:var(--muted);font-size:0.75rem;margin-bottom:1rem}
+
+/* MARQUEE */
+.marquee-wrap{
+  border-top:1px solid rgba(0,100,200,0.1);
+  border-bottom:1px solid rgba(0,100,200,0.1);
+  padding:0.9rem 0;overflow:hidden;
+  background:rgba(220,232,255,0.5);
+  position:relative;z-index:1;
+}
+.marquee{
+  display:flex;gap:3rem;white-space:nowrap;
+  animation:marquee 28s linear infinite;
+}
+.m-item{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.68rem;color:var(--muted);
+  letter-spacing:0.12em;text-transform:uppercase;
+  display:flex;align-items:center;gap:1.25rem;flex-shrink:0;
+}
+.m-item::after{content:'◆';color:var(--azure2);font-size:0.45rem;opacity:0.5}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* SECTIONS */
+.section{
+  padding:7rem 3.5rem;
+  position:relative;z-index:1;
+}
+.section-inner{max-width:1200px;margin:0 auto}
+.s-eyebrow{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.68rem;color:var(--azure);
+  letter-spacing:0.2em;text-transform:uppercase;
+  margin-bottom:1rem;
+  display:inline-flex;align-items:center;gap:0.75rem;
+}
+.s-eyebrow::before{
+  content:'';width:20px;height:1px;
+  background:var(--azure);opacity:0.6;
+}
+.s-title{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(2.25rem,4.5vw,3.5rem);
+  font-weight:800;line-height:1;
+  letter-spacing:-0.03em;color:var(--text);
+  margin-bottom:0.5rem;
+}
+.s-title em{
+  font-family:'Cormorant Garamond',serif;
+  font-weight:300;font-style:italic;
+  color:var(--azure2);
+}
+.s-sub{
+  font-size:0.95rem;color:var(--muted);
+  max-width:440px;line-height:1.7;margin-top:0.75rem;
+}
+.section-head{margin-bottom:3.5rem}
+
+/* ABOUT */
+.about-section{background:var(--bg2)}
+.about-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:4rem;align-items:start;margin-top:3.5rem;
+}
+.about-text p{
+  font-size:1rem;color:var(--muted);
+  line-height:1.85;margin-bottom:1.25rem;font-weight:400;
+}
+.about-text p strong{color:var(--text);font-weight:600}
+.about-highlights{
+  display:flex;flex-direction:column;gap:0;
+}
+.ah-item{
+  display:flex;align-items:flex-start;gap:1.25rem;
+  padding:1.5rem 0;
+  border-bottom:1px solid var(--border);
+  transition:all 0.2s;
+}
+.ah-item:first-child{border-top:1px solid var(--border)}
+.ah-item:hover .ah-num{color:var(--cyan)}
+.ah-num{
+  font-family:'Syne',sans-serif;
+  font-size:2.5rem;font-weight:800;
+  color:var(--azure);opacity:0.6;
+  line-height:1;flex-shrink:0;
+  transition:color 0.2s;
+}
+.ah-label{font-size:0.9rem;font-weight:600;color:var(--text);margin-bottom:0.2rem}
+.ah-desc{font-size:0.8rem;color:var(--muted);line-height:1.5}
+
+/* PROJECTS */
+.projects-section{background:var(--bg)}
+.projects-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:var(--border);
+  border:1px solid var(--border);
+  margin-top:3.5rem;
+}
+.proj{
+  background:var(--panel);
+  padding:2.5rem;
+  transition:all 0.25s;position:relative;overflow:hidden;
+}
+.proj::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(0,148,214,0.06),transparent 50%);
+  opacity:0;transition:opacity 0.3s;
+}
+.proj:hover::before{opacity:1}
+.proj:hover{background:var(--panel2)}
+.proj-accent{
+  position:absolute;top:0;left:0;right:0;height:2px;
+  opacity:0;transition:opacity 0.3s;
+}
+.proj:nth-child(1) .proj-accent{background:linear-gradient(90deg,var(--azure),var(--cyan))}
+.proj:nth-child(2) .proj-accent{background:linear-gradient(90deg,var(--cyan),#00ffb3)}
+.proj:nth-child(3) .proj-accent{background:linear-gradient(90deg,var(--gold),var(--gold2))}
+.proj:hover .proj-accent{opacity:1}
+.proj-num{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.6rem;color:var(--muted);
+  letter-spacing:0.15em;margin-bottom:2rem;
+}
+.proj-icon{
+  font-size:2rem;margin-bottom:1.5rem;display:block;
+  filter:grayscale(0.2);
+}
+.proj-date{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.62rem;color:var(--azure);
+  letter-spacing:0.08em;margin-bottom:0.75rem;
+}
+.proj-title{
+  font-family:'Syne',sans-serif;
+  font-size:1.15rem;font-weight:700;
+  color:var(--text);margin-bottom:0.85rem;line-height:1.25;
+}
+.proj-desc{
+  font-size:0.85rem;color:var(--muted2);
+  line-height:1.75;margin-bottom:1.75rem;
+}
+.proj-tags{display:flex;flex-wrap:wrap;gap:0.35rem}
+.ptag{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.6rem;color:var(--azure);
+  background:rgba(0,100,200,0.07);
+  border:1px solid rgba(0,100,200,0.18);
+  padding:0.2rem 0.55rem;
+}
+
+/* EXPERIENCE */
+.exp-section{background:var(--bg2)}
+.exp-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:1.5rem;margin-top:3.5rem;
+}
+.exp-card{
+  border:1px solid rgba(0,100,200,0.12);
+  padding:2.5rem;background:var(--panel);
+  position:relative;overflow:hidden;transition:all 0.25s;
+}
+.exp-card:hover{border-color:rgba(0,100,200,0.25);background:var(--panel2)}
+.exp-card::after{
+  content:'';position:absolute;
+  top:0;left:0;width:2px;height:0;
+  background:linear-gradient(180deg,var(--azure2),var(--azure));
+  transition:height 0.4s;
+}
+.exp-card:hover::after{height:100%}
+.exp-num{
+  position:absolute;right:2rem;bottom:1.5rem;
+  font-family:'Syne',sans-serif;
+  font-size:8rem;font-weight:800;
+  color:rgba(0,100,200,0.05);
+  line-height:1;letter-spacing:-0.05em;
+  pointer-events:none;
+}
+.exp-period{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.65rem;color:var(--cyan);
+  letter-spacing:0.1em;margin-bottom:1.5rem;
+  display:flex;align-items:center;gap:0.55rem;
+}
+.ep-dot{
+  width:5px;height:5px;
+  background:var(--azure);border-radius:50%;
+  box-shadow:0 0 6px rgba(0,120,200,0.5);
+}
+.ep-dot.live{animation:pulse-dot 2s infinite}
+.exp-role{
+  font-family:'Syne',sans-serif;
+  font-size:1.35rem;font-weight:700;
+  color:var(--text);letter-spacing:-0.02em;
+  line-height:1.15;margin-bottom:0.4rem;
+}
+.exp-co{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.75rem;color:var(--azure2);
+  margin-bottom:1.75rem;letter-spacing:0.05em;
+}
+.exp-list{list-style:none}
+.exp-list li{
+  font-size:0.84rem;color:var(--muted);
+  padding:0.5rem 0 0.5rem 1.25rem;
+  position:relative;line-height:1.65;
+  border-bottom:1px solid rgba(0,0,0,0.05);
+}
+.exp-list li:last-child{border-bottom:none}
+.exp-list li::before{
+  content:'▸';position:absolute;left:0;
+  color:var(--azure);font-size:0.7rem;line-height:1.7;
+}
+
+/* SKILLS */
+.skills-section{background:var(--bg)}
+.skills-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;background:var(--border);
+  border:1px solid var(--border);
+  margin-top:3.5rem;
+}
+.sg{
+  background:var(--panel);
+  padding:2rem 1.75rem;
+  transition:background 0.2s;
+}
+.sg:hover{background:var(--panel2)}
+.sg-head{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.62rem;color:var(--azure);
+  letter-spacing:0.15em;text-transform:uppercase;
+  margin-bottom:1.5rem;
+  padding-bottom:1rem;
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:0.6rem;
+}
+.sg-list{display:flex;flex-direction:column;gap:0}
+.sg-item{
+  font-size:0.86rem;color:var(--muted);
+  display:flex;align-items:center;gap:0.65rem;
+  padding:0.5rem 0;
+  border-bottom:1px solid rgba(0,0,0,0.05);
+  transition:color 0.15s,padding-left 0.2s;
+}
+.sg-item:last-child{border-bottom:none}
+.sg-item::before{
+  content:'';width:3px;height:3px;
+  background:var(--azure);border-radius:50%;flex-shrink:0;
+  transition:background 0.15s;
+}
+.sg:hover .sg-item{color:var(--text)}
+.sg:hover .sg-item::before{background:var(--cyan)}
+
+/* CERTS */
+.certs-section{background:var(--bg2)}
+.certs-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);
+  gap:1px;background:var(--border);
+  border:1px solid var(--border);
+  margin-top:3.5rem;
+}
+.cert-row{
+  background:var(--panel);
+  padding:1.5rem 2rem;
+  display:flex;align-items:center;gap:1.5rem;
+  transition:background 0.15s;position:relative;overflow:hidden;
+}
+.cert-row::before{
+  content:'';position:absolute;
+  left:0;top:0;bottom:0;width:0;
+  background:var(--azure);
+  transition:width 0.2s;
+}
+.cert-row:hover{background:var(--panel2)}
+.cert-row:hover::before{width:2px}
+.cert-idx{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.62rem;color:var(--muted);min-width:22px;
+}
+.cert-info{flex:1}
+.cert-name{font-size:0.88rem;font-weight:600;color:var(--text)}
+.cert-org{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.68rem;color:var(--muted);margin-top:2px;
+}
+.cert-badge{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.6rem;padding:0.22rem 0.65rem;
+  font-weight:400;letter-spacing:0.08em;
+  background:rgba(0,100,200,0.07);
+  color:var(--azure);
+  border:1px solid rgba(0,100,200,0.2);
+  white-space:nowrap;
+}
+
+/* CONTACT */
+.contact-section{
+  padding:8rem 3.5rem;
+  position:relative;z-index:1;
+  text-align:center;
+  overflow:hidden;
+}
+.contact-section::before{
+  content:'';position:absolute;
+  top:50%;left:50%;
+  width:800px;height:800px;
+  transform:translate(-50%,-50%);
+  background:radial-gradient(ellipse,rgba(0,120,220,0.1) 0%,transparent 65%);
+  pointer-events:none;
+}
+.contact-inner{max-width:700px;margin:0 auto;position:relative}
+.contact-avail{
+  display:inline-flex;align-items:center;gap:0.6rem;
+  border:1px solid rgba(0,120,200,0.2);
+  background:rgba(0,120,200,0.06);
+  color:var(--azure);
+  padding:0.4rem 1.1rem;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;
+  margin-bottom:2.5rem;
+}
+.contact-title{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(3rem,7vw,5.5rem);
+  font-weight:800;line-height:0.9;
+  letter-spacing:-0.04em;
+  margin-bottom:1.5rem;
+}
+.contact-title .line1{color:var(--text)}
+.contact-title .line2{
+  font-family:'Cormorant Garamond',serif;
+  font-weight:300;font-style:italic;
+  color:var(--azure2);
+}
+.contact-sub{
+  font-size:1rem;color:var(--muted2);
+  margin-bottom:3rem;line-height:1.6;
+}
+.contact-links{
+  display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;
+}
+.c-link{
+  display:flex;align-items:center;gap:0.6rem;
+  color:var(--muted);text-decoration:none;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.72rem;letter-spacing:0.06em;
+  padding:0.8rem 1.5rem;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,0.7);
+  transition:all 0.2s;
+}
+.c-link:hover{
+  color:var(--azure);
+  border-color:rgba(0,120,200,0.35);
+  background:rgba(0,120,200,0.07);
+  box-shadow:0 4px 20px rgba(0,120,200,0.1);
+}
+
+/* FOOTER */
+footer{
+  position:relative;z-index:1;
+  border-top:1px solid var(--border);
+  padding:1.75rem 3.5rem;
+  display:flex;align-items:center;justify-content:space-between;
+  background:var(--bg);
+}
+
+.foot-l{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.7rem;color:var(--muted);
+  letter-spacing:0.08em;
+  display:flex;align-items:center;gap:0.75rem;
+}
+.foot-l::before{content:'©';color:var(--azure);opacity:0.6}
+.foot-r{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.68rem;color:var(--muted);opacity:0.5;
+}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.7s cubic-bezier(0.16,1,0.3,1),transform 0.7s cubic-bezier(0.16,1,0.3,1)}
+.reveal.in{opacity:1;transform:none}
+.d1{transition-delay:0.06s}.d2{transition-delay:0.14s}.d3{transition-delay:0.22s}.d4{transition-delay:0.3s}
+
+/* DIVIDER LINE */
+.h-line{
+  height:1px;background:linear-gradient(90deg,transparent,rgba(0,100,200,0.15),transparent);
+  margin:0;
+}
+
+@media(max-width:1024px){
+  .hero-grid{grid-template-columns:1fr}
+  .hero-panel{display:none}
+  .about-grid{grid-template-columns:1fr}
+}
+@media(max-width:768px){
+  nav{padding:0 1.5rem}
+  .nav-links{display:none}
+  .section,.hero{padding-left:1.5rem;padding-right:1.5rem}
+  .hero{padding-top:7rem}
+  .projects-grid{grid-template-columns:1fr}
+  .exp-grid{grid-template-columns:1fr}
+  .skills-grid{grid-template-columns:1fr 1fr}
+  .certs-grid{grid-template-columns:1fr}
+  footer{flex-direction:column;gap:0.5rem;padding:1.5rem;text-align:center}
+  nav{padding:0 1.5rem}
+}
+</style>
+</head>
+<body>
+
+<canvas id="bg-canvas"></canvas>
+<div class="cursor-dot" id="cdot"></div>
+<div class="cursor-ring" id="cring"></div>
+
+<nav>
+  <div class="nav-logo">
+    <span class="nav-logo-bracket">[</span>
+    <span class="nav-logo-name">jyothi.g</span>
+    <span class="nav-logo-bracket">]</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#certifications">Certs</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-status"><div class="live-dot"></div>Open to work</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-grid">
+    <div>
+      <div class="hero-tag reveal">
+        <div class="hero-tag-line"></div>
+        <span class="hero-tag-text">Cloud & DevOps Engineer · Bengaluru</span>
+      </div>
+      <h1 class="hero-name reveal d1">
+        <span class="first">Jyothi</span>
+        <span class="last">G.</span>
+      </h1>
+      <div class="hero-role reveal d2">
+        Azure Specialist <span class="role-sep">·</span>
+        AZ-900 &amp; AZ-104 <span class="role-sep">·</span>
+        30-day Notice
+      </div>
+      <p class="hero-bio reveal d2">
+        Azure-certified engineer with 1+ year of experience building cloud infrastructure and AI-powered solutions at GradientM. 3 shipped projects in 6 months — voice bots, enterprise tools, automation platforms.
+      </p>
+      <div class="hero-btns reveal d3">
+        <a href="https://www.linkedin.com/in/jyothi-g-623594292/" target="_blank" class="btn-primary">Connect on LinkedIn ↗</a>
+        <a href="mailto:jyothishettyg6@gmail.com" class="btn-secondary">Send Email</a>
+      </div>
+      <div class="hero-meta reveal d3">
+        <a href="mailto:jyothishettyg6@gmail.com">✉ jyothishettyg6@gmail.com</a>
+        <a href="tel:+918431704108">✆ +91 84317 04108</a>
+      </div>
+    </div>
+    <div class="hero-panel reveal d2">
+      <div class="panel-card glow-card">
+        <div class="plabel">Profile</div>
+        <div class="avatar-block">
+          <div class="av">JG</div>
+          <div class="av-info">
+            <div class="av-name">Jyothi G</div>
+            <div class="av-role">Cloud & DevOps Engineer</div>
+          </div>
+        </div>
+        <div class="stats-row">
+          <div class="stat-cell"><div class="stat-n">1+</div><div class="stat-l">Yrs exp</div></div>
+          <div class="stat-cell"><div class="stat-n">3</div><div class="stat-l">Projects</div></div>
+          <div class="stat-cell"><div class="stat-n">6</div><div class="stat-l">Certs</div></div>
+        </div>
+      </div>
+      <div class="panel-card">
+        <div class="plabel">Certifications</div>
+        <div class="cert-chips">
+          <span class="chip chip-azure">AZ-900</span>
+          <span class="chip chip-azure">AZ-104</span>
+          <span class="chip chip-cyan">Multi-cloud</span>
+          <span class="chip chip-gold">Claude API</span>
+          <span class="chip chip-gold">MCP</span>
+          <span class="chip chip-gold">Agent Skills</span>
+        </div>
+      </div>
+      <div class="panel-card glow-card">
+        <div class="panel-co">GradientM · Bengaluru</div>
+        <div class="panel-co-sub">Cloud & DevOps Engineer · Jan 2026 – Present</div>
+        <div class="cert-chips">
+          <span class="chip chip-azure">Azure</span>
+          <span class="chip chip-cyan">DevOps</span>
+          <span class="chip chip-gold">AI Projects</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee-wrap">
+  <div class="marquee">
+    <span class="m-item">Microsoft Azure</span><span class="m-item">AZ-900</span><span class="m-item">AZ-104</span><span class="m-item">DevOps</span><span class="m-item">Cloud Infrastructure</span><span class="m-item">Voice AI</span><span class="m-item">Python</span><span class="m-item">GitHub</span><span class="m-item">Flask</span><span class="m-item">Automation</span><span class="m-item">Claude MCP</span><span class="m-item">App Services</span>
+    <span class="m-item">Microsoft Azure</span><span class="m-item">AZ-900</span><span class="m-item">AZ-104</span><span class="m-item">DevOps</span><span class="m-item">Cloud Infrastructure</span><span class="m-item">Voice AI</span><span class="m-item">Python</span><span class="m-item">GitHub</span><span class="m-item">Flask</span><span class="m-item">Automation</span><span class="m-item">Claude MCP</span><span class="m-item">App Services</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="section about-section" id="about">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <div class="s-eyebrow">About</div>
+      <h2 class="s-title">Building the <em>cloud</em></h2>
+      <p class="s-sub">From sales to cloud engineering — driven by curiosity, certified by results.</p>
+    </div>
+    <div class="about-grid">
+      <div class="about-text reveal d1">
+        <p>I'm a <strong>Cloud & DevOps Engineer</strong> at GradientM, Bengaluru, where I architect and maintain Azure cloud infrastructure for enterprise clients. What sets my story apart: I made the switch from sales to cloud engineering in just 3 months — purely on technical merit.</p>
+        <p>In 6 months as a trainee, I shipped 3 full end-to-end Azure projects: an AI-powered <strong>Voice Onboarding Bot</strong>, the <strong>Pulse Inbox</strong> platform, and the <strong>Prospector Tool</strong>. Each one taught me how to move fast, build clean, and deliver value on the cloud.</p>
+        <p>I hold <strong>AZ-900 and AZ-104</strong> certifications from Microsoft, alongside Anthropic certifications in Claude API, MCP, and Agent Skills — reflecting my growing interest in <strong>AI-augmented cloud solutions</strong>.</p>
+      </div>
+      <div class="about-highlights">
+        <div class="ah-item reveal d1">
+          <div class="ah-num">3</div>
+          <div><div class="ah-label">Enterprise Projects Shipped</div><div class="ah-desc">Voice Bot, Pulse Inbox, Prospector Tool — all in 6 months</div></div>
+        </div>
+        <div class="ah-item reveal d2">
+          <div class="ah-num">6</div>
+          <div><div class="ah-label">Certifications Earned</div><div class="ah-desc">Microsoft Azure (AZ-900, AZ-104) + 4 Anthropic certs</div></div>
+        </div>
+        <div class="ah-item reveal d3">
+          <div class="ah-num">3<span style="font-size:1.5rem">mo</span></div>
+          <div><div class="ah-label">Career Pivot Timeline</div><div class="ah-desc">Sales → Cloud Engineering on technical merit alone</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="h-line"></div>
+
+<!-- PROJECTS -->
+<section class="section projects-section" id="projects">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <div class="s-eyebrow">Projects</div>
+      <h2 class="s-title">Selected <em>work</em></h2>
+      <p class="s-sub">End-to-end solutions built on Microsoft Azure.</p>
+    </div>
+    <div class="projects-grid">
+      <div class="proj reveal d1">
+        <div class="proj-accent"></div>
+        <div class="proj-num">01 / 03</div>
+        <span class="proj-icon">🎙️</span>
+        <div class="proj-date">Nov – Dec 2025</div>
+        <div class="proj-title">Digital Onboarding Voice Bot</div>
+        <p class="proj-desc">AI-powered voice bot automating customer onboarding via Azure Cognitive Services. Natural language processing reduced manual effort and improved customer response speed.</p>
+        <div class="proj-tags"><span class="ptag">Azure Cognitive</span><span class="ptag">Voice AI</span><span class="ptag">Python</span><span class="ptag">Automation</span></div>
+      </div>
+      <div class="proj reveal d2">
+        <div class="proj-accent"></div>
+        <div class="proj-num">02 / 03</div>
+        <span class="proj-icon">📬</span>
+        <div class="proj-date">Sep – Oct 2025</div>
+        <div class="proj-title">Pulse Inbox</div>
+        <p class="proj-desc">Centralized communication & tracking platform on Azure App Services. Manages customer and internal workflows, improving team response efficiency organisation-wide.</p>
+        <div class="proj-tags"><span class="ptag">App Services</span><span class="ptag">Flask</span><span class="ptag">JavaScript</span><span class="ptag">SQL</span></div>
+      </div>
+      <div class="proj reveal d3">
+        <div class="proj-accent"></div>
+        <div class="proj-num">03 / 03</div>
+        <span class="proj-icon">🎯</span>
+        <div class="proj-date">Jul – Aug 2025</div>
+        <div class="proj-title">Prospector Tool</div>
+        <p class="proj-desc">Enterprise lead generation app with automated workflows and Azure cloud data management. Enables business teams to identify and manage potential clients efficiently.</p>
+        <div class="proj-tags"><span class="ptag">Azure Storage</span><span class="ptag">Python</span><span class="ptag">GitHub</span><span class="ptag">Automation</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="h-line"></div>
+
+<!-- EXPERIENCE -->
+<section class="section exp-section" id="experience">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <div class="s-eyebrow">Experience</div>
+      <h2 class="s-title">Where I've <em>worked</em></h2>
+    </div>
+    <div class="exp-grid">
+      <div class="exp-card reveal d1">
+        <div class="exp-num">01</div>
+        <div class="exp-period"><div class="ep-dot live"></div>Jan 2026 — Present</div>
+        <div class="exp-role">Cloud & DevOps<br>Engineer</div>
+        <div class="exp-co">GradientM · Bengaluru</div>
+        <ul class="exp-list">
+          <li>Azure cloud infra for 3+ enterprise deployments — App Services, VMs, Storage</li>
+          <li>Cross-functional collaboration driving cloud solutions & DevOps best practices</li>
+          <li>Automation pipelines improving infrastructure reliability & performance</li>
+          <li>3+ AI-powered projects using Azure Cognitive and cloud services</li>
+        </ul>
+      </div>
+      <div class="exp-card reveal d2">
+        <div class="exp-num">02</div>
+        <div class="exp-period"><div class="ep-dot"></div>2025 — Jan 2026</div>
+        <div class="exp-role">Azure<br>Trainee</div>
+        <div class="exp-co">GradientM · Bengaluru</div>
+        <ul class="exp-list">
+          <li>Transitioned from sales to cloud engineering in 3 months on technical merit</li>
+          <li>3 end-to-end Azure projects shipped in 6 months</li>
+          <li>Hands-on Azure services, GitHub, automation & cloud deployments</li>
+          <li>Directly mentored into Azure & DevOps by senior management</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="h-line"></div>
+
+<!-- SKILLS -->
+<section class="section skills-section" id="skills">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <div class="s-eyebrow">Skills</div>
+      <h2 class="s-title">Tech <em>stack</em></h2>
+    </div>
+    <div class="skills-grid">
+      <div class="sg reveal d1">
+        <div class="sg-head">☁ Cloud</div>
+        <div class="sg-list">
+          <div class="sg-item">Microsoft Azure</div>
+          <div class="sg-item">Azure VMs</div>
+          <div class="sg-item">App Services</div>
+          <div class="sg-item">Azure Storage</div>
+          <div class="sg-item">Resource Manager</div>
+        </div>
+      </div>
+      <div class="sg reveal d2">
+        <div class="sg-head">⌨ Languages</div>
+        <div class="sg-list">
+          <div class="sg-item">Python</div>
+          <div class="sg-item">Java</div>
+          <div class="sg-item">SQL</div>
+          <div class="sg-item">C</div>
+        </div>
+      </div>
+      <div class="sg reveal d2">
+        <div class="sg-head">🌐 Web</div>
+        <div class="sg-list">
+          <div class="sg-item">HTML / CSS</div>
+          <div class="sg-item">JavaScript</div>
+          <div class="sg-item">Flask</div>
+        </div>
+      </div>
+      <div class="sg reveal d3">
+        <div class="sg-head">🛠 Tools & OS</div>
+        <div class="sg-list">
+          <div class="sg-item">GitHub</div>
+          <div class="sg-item">Azure Portal</div>
+          <div class="sg-item">Visual Studio</div>
+          <div class="sg-item">Linux / Windows</div>
+          <div class="sg-item">Copilot</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="h-line"></div>
+
+<!-- CERTIFICATIONS -->
+<section class="section certs-section" id="certifications">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <div class="s-eyebrow">Certifications</div>
+      <h2 class="s-title">Credentials &amp; <em>learning</em></h2>
+    </div>
+    <div class="certs-grid reveal d1">
+      <div class="cert-row">
+        <span class="cert-idx">01</span>
+        <div class="cert-info"><div class="cert-name">Azure Fundamentals</div><div class="cert-org">Microsoft</div></div>
+        <span class="cert-badge">AZ-900</span>
+      </div>
+      <div class="cert-row">
+        <span class="cert-idx">02</span>
+        <div class="cert-info"><div class="cert-name">Azure Administrator</div><div class="cert-org">Microsoft</div></div>
+        <span class="cert-badge">AZ-104</span>
+      </div>
+      <div class="cert-row">
+        <span class="cert-idx">03</span>
+        <div class="cert-info"><div class="cert-name">Intro to Cloud: Azure, AWS &amp; GCP</div><div class="cert-org">Cloud Foundation</div></div>
+        <span class="cert-badge">Multi-cloud</span>
+      </div>
+      <div class="cert-row">
+        <span class="cert-idx">04</span>
+        <div class="cert-info"><div class="cert-name">Building with Claude API</div><div class="cert-org">Anthropic</div></div>
+        <span class="cert-badge">AI / API</span>
+      </div>
+      <div class="cert-row">
+        <span class="cert-idx">05</span>
+        <div class="cert-info"><div class="cert-name">Model Context Protocol</div><div class="cert-org">Anthropic</div></div>
+        <span class="cert-badge">MCP</span>
+      </div>
+      <div class="cert-row">
+        <span class="cert-idx">06</span>
+        <div class="cert-info"><div class="cert-name">Agent Skills</div><div class="cert-org">Anthropic</div></div>
+        <span class="cert-badge">AI Agents</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div class="contact-avail reveal"><div class="live-dot"></div>Open to work · 30-day notice period</div>
+    <h2 class="contact-title reveal d1">
+      <div class="line1">Let's</div>
+      <div class="line2">connect.</div>
+    </h2>
+    <p class="contact-sub reveal d2">Looking for a Cloud & DevOps Engineer? I'd love to hear from you.</p>
+    <div class="contact-links reveal d3">
+      <a href="mailto:jyothishettyg6@gmail.com" class="c-link">✉ jyothishettyg6@gmail.com</a>
+      <a href="tel:+918431704108" class="c-link">✆ +91 84317 04108</a>
+      <a href="https://www.linkedin.com/in/jyothi-g-623594292/" target="_blank" class="c-link">in LinkedIn ↗</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-l">jyothi.g · bengaluru · 2026</div>
+  <div class="foot-r">Cloud & DevOps Engineer · Notice: 30 days</div>
+</footer>
+
+<script>
+/* ── CANVAS BACKGROUND ── */
+const canvas = document.getElementById('bg-canvas');
+const ctx = canvas.getContext('2d');
+let W, H, particles = [], lines = [];
+
+function resize(){
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+const particleColors=['80,140,255','140,100,255','0,160,220','80,200,180','160,120,255','100,180,255'];
+class Particle {
+  constructor(){this.reset(true)}
+  reset(init){
+    this.x = Math.random()*W;
+    this.y = init ? Math.random()*H : H+10;
+    this.size = Math.random()*1.8+0.3;
+    this.speed = Math.random()*0.35+0.06;
+    this.opacity = Math.random()*0.6+0.15;
+    this.drift = (Math.random()-0.5)*0.18;
+    this.color = particleColors[Math.floor(Math.random()*particleColors.length)];
+  }
+  update(){
+    this.y -= this.speed;
+    this.x += this.drift;
+    if(this.y < -10) this.reset(false);
+  }
+  draw(){
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
+    ctx.fillStyle = `rgba(${this.color},${this.opacity*0.7})`;
+    ctx.fill();
+    if(this.size>1.2){
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size*3, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(${this.color},${this.opacity*0.08})`;
+      ctx.fill();
+    }
+  }
+}
+
+// Create grid lines
+const COLS = 12, ROWS = 8;
+function drawGrid(){
+  const cw = W/COLS, rh = H/ROWS;
+  ctx.strokeStyle = 'rgba(80,120,220,0.07)';
+  ctx.lineWidth = 1;
+  for(let i=0;i<=COLS;i++){
+    ctx.beginPath();ctx.moveTo(i*cw,0);ctx.lineTo(i*cw,H);ctx.stroke();
+  }
+  for(let j=0;j<=ROWS;j++){
+    ctx.beginPath();ctx.moveTo(0,j*rh);ctx.lineTo(W,j*rh);ctx.stroke();
+  }
+}
+
+// Init particles
+for(let i=0;i<90;i++) particles.push(new Particle());
+
+// Floating soft pastel orbs
+const orbs = [
+  {x:0.08,y:0.18,r:420,color:'rgba(100,160,255,0.18)'},   // soft blue top-left
+  {x:0.88,y:0.12,r:360,color:'rgba(180,120,255,0.14)'},   // soft lavender top-right
+  {x:0.75,y:0.58,r:400,color:'rgba(80,200,255,0.12)'},    // sky cyan mid-right
+  {x:0.18,y:0.72,r:380,color:'rgba(80,220,180,0.11)'},    // mint teal bottom-left
+  {x:0.5,y:0.38,r:320,color:'rgba(150,100,255,0.09)'},    // violet centre
+  {x:0.62,y:0.88,r:300,color:'rgba(80,140,255,0.13)'},    // periwinkle bottom
+  {x:0.0,y:0.5,r:280,color:'rgba(100,220,200,0.08)'},     // aqua left edge
+  {x:0.9,y:0.8,r:260,color:'rgba(255,160,120,0.07)'},     // peach bottom-right
+];
+
+let t=0;
+function animate(){
+  ctx.clearRect(0,0,W,H);
+  t+=0.004;
+  
+  // Light base
+  const grad = ctx.createLinearGradient(0,0,W,H);
+  grad.addColorStop(0,'#f7f9ff');
+  grad.addColorStop(0.5,'#f0f4ff');
+  grad.addColorStop(1,'#eef2ff');
+  ctx.fillStyle=grad;ctx.fillRect(0,0,W,H);
+  
+  // Animated soft color orbs
+  orbs.forEach((o,i)=>{
+    const px = o.x*W + Math.sin(t*0.8+i*1.3)*55;
+    const py = o.y*H + Math.cos(t*0.6+i*0.9)*40;
+    const g = ctx.createRadialGradient(px,py,0,px,py,o.r);
+    g.addColorStop(0,o.color);
+    g.addColorStop(0.5,o.color.replace(/[\d.]+\)$/,v=>parseFloat(v)*0.4+')'));
+    g.addColorStop(1,'transparent');
+    ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+  });
+
+  // Extra pulsing soft accent top
+  const pulse = 0.5+0.5*Math.sin(t*2);
+  const pg = ctx.createRadialGradient(W*0.5,0,0,W*0.5,0,H*0.55);
+  pg.addColorStop(0,`rgba(100,160,255,${0.07*pulse})`);
+  pg.addColorStop(1,'transparent');
+  ctx.fillStyle=pg;ctx.fillRect(0,0,W,H);
+
+  drawGrid();
+  
+  // Scanning line
+  const scanY = ((t*60)%H);
+  const scanGrad = ctx.createLinearGradient(0,scanY-24,0,scanY+4);
+  scanGrad.addColorStop(0,'transparent');
+  scanGrad.addColorStop(1,'rgba(100,160,255,0.08)');
+  ctx.fillStyle=scanGrad;ctx.fillRect(0,scanY-24,W,28);
+  
+  // Particles — mix of colors
+  particles.forEach(p=>{p.update();p.draw();});
+  
+  // Connect nearby particles
+  for(let i=0;i<particles.length;i++){
+    for(let j=i+1;j<particles.length;j++){
+      const dx=particles[i].x-particles[j].x;
+      const dy=particles[i].y-particles[j].y;
+      const d=Math.sqrt(dx*dx+dy*dy);
+      if(d<90){
+        ctx.beginPath();
+        const alpha = 0.1*(1-d/90);
+        ctx.strokeStyle=`rgba(80,140,255,${alpha*0.5})`;
+        ctx.lineWidth=0.5;
+        ctx.moveTo(particles[i].x,particles[i].y);
+        ctx.lineTo(particles[j].x,particles[j].y);
+        ctx.stroke();
+      }
+    }
+  }
+  
+  requestAnimationFrame(animate);
+}
+animate();
+
+/* ── CUSTOM CURSOR ── */
+const cdot=document.getElementById('cdot'),cring=document.getElementById('cring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  cdot.style.left=mx+'px';cdot.style.top=my+'px';
+});
+(function loop(){
+  rx+=(mx-rx)*0.1;ry+=(my-ry)*0.1;
+  cring.style.left=rx+'px';cring.style.top=ry+'px';
+  requestAnimationFrame(loop);
+})();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{
+    cring.style.width='52px';cring.style.height='52px';
+    cring.style.borderColor='rgba(0,120,200,0.7)';
+  });
+  el.addEventListener('mouseleave',()=>{
+    cring.style.width='36px';cring.style.height='36px';
+    cring.style.borderColor='rgba(0,120,200,0.35)';
+  });
+});
+
+/* ── REVEAL ON SCROLL ── */
+const obs=new IntersectionObserver(entries=>entries.forEach((e,i)=>{
+  if(e.isIntersecting)setTimeout(()=>e.target.classList.add('in'),i*60);
+}),{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
